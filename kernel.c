@@ -18,6 +18,9 @@ void clearScr(char *vidptr) {
 }
 
 void prog1Run(char *vidptr) {
+    clearScr(vidptr);
+
+
     char *str = "prog 1 running";
     unsigned int i = 0;
     unsigned int j = 0;
@@ -32,9 +35,15 @@ void prog1Run(char *vidptr) {
     return;
 }
 
+void sleep(unsigned int mseconds)
+{   
+    long i;
+    for(i=0; i < mseconds * 100000; i++); // this is stupid
+}
+
 
 void kmain(void) {
-    char *str = "yay i made a kernel";
+    char *str = "booted.";
     char *vidptr = (char*)0xb8000;  // video memory begins here
 
     clearScr(vidptr);
@@ -47,6 +56,10 @@ void kmain(void) {
         ++j;
         i = i + 2;
     }
+    sleep(5000);
+
+    prog1Run(vidptr);
+
     return;
 }
 
