@@ -1,7 +1,8 @@
 // kernel.c
-void kmain(void) {
-    char *str = "yay i made a kernel";
-    char *vidptr = (char*)0xb8000;  // video memory begins here
+
+#include "queue.h"
+
+void clearScr(char *vidptr) {
     unsigned int i = 0;
     unsigned int j = 0;
 
@@ -13,13 +14,39 @@ void kmain(void) {
         vidptr[j+1] = 0x07;
         j = j + 2;
     }
+    return;
+}
 
-    j = 0;
+void prog1Run(char *vidptr) {
+    char *str = "prog 1 running";
+    unsigned int i = 0;
+    unsigned int j = 0;
+
     while(str[j] != '\0') {
         vidptr[i] = str[j];
-        vidptr[i+1] = 0x07;
+        vidptr[i+1] = 0x04;  // attribute-byte
+        ++j;
+        i = i + 2;
+    }
+
+    return;
+}
+
+
+void kmain(void) {
+    char *str = "yay i made a kernel";
+    char *vidptr = (char*)0xb8000;  // video memory begins here
+
+    clearScr(vidptr);
+
+    unsigned int i = 0;
+    unsigned int j = 0;
+    while(str[j] != '\0') {
+        vidptr[i] = str[j];
+        vidptr[i+1] = 0x03;
         ++j;
         i = i + 2;
     }
     return;
 }
+
