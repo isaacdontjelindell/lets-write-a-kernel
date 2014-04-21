@@ -20,7 +20,6 @@ void clearScr(char *vidptr) {
 void prog1Run(char *vidptr) {
     clearScr(vidptr);
 
-
     char *str = "prog 1 running";
     unsigned int i = 0;
     unsigned int j = 0;
@@ -35,10 +34,8 @@ void prog1Run(char *vidptr) {
     return;
 }
 
-void sleep(unsigned int mseconds)
-{   
-    long i;
-    for(i=0; i < mseconds * 100000; i++); // this is stupid
+void sleep(unsigned int mseconds) {
+    for(long i=0; i < mseconds * 100000; i++); // this is stupid
 }
 
 
@@ -56,7 +53,7 @@ void kmain(void) {
         ++j;
         i = i + 2;
     }
-    sleep(5000);
+    sleep(1000);
 
     prog1Run(vidptr);
 
